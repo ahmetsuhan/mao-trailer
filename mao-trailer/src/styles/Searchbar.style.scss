@@ -1,0 +1,30 @@
+.searchbar {
+  max-width: 250px;
+  display: flex;
+  align-items: center;
+
+  input {
+    width: 0;
+    transform-origin: right;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    border-bottom: 1px solid #333;
+  }
+
+  i {
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .grow {
+    width: 150px;
+    transition: all 0.4s ease-in;
+  }
+  .shrink {
+    width: 0px;
+    transition: all 0.4s ease-out;
+    padding: 0;
+    border: none;
+  }
+}
