@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
 import PopularCard from "../../Cards/PopularCard";
 
@@ -8,11 +8,14 @@ const PopularList = ({ popular }) => {
   const { path, url } = useRouteMatch();
   const tv = useSelector((state) => state.tv.popularTvies);
   let title = "Popular List";
-  if (!popular[0]) {
-    return <h1>Loading....</h1>;
-  } else if (!tv[0]) {
-    return <h1>Loading....</h1>;
-  }
+
+  useEffect(() => {
+    if (!popular[0]) {
+      return <h1>Loading....</h1>;
+    } else if (!tv[0]) {
+      return <h1>Loading....</h1>;
+    }
+  }, [popular, tv]);
 
   const handleTitle = (url, title) => {
     if (url.includes("movies-all")) {
