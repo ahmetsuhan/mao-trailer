@@ -1,0 +1,27 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: #000;
+  width: 100%;
+  height: 83px;
+
+  .menubar {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div {
+      width: 33%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 49px;
+    }
+    .movies-tab {
+    }
+  }
+}
