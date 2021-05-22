@@ -81,8 +81,13 @@ const Root = () => {
           path="/tv/:listname"
           render={(routeProps) => <MoviesMorePage {...routeProps} />}
         />
-        <Route exact path="/tv/detail/:id" render={() => <MovieDetailPage />} />
 
+        <Route exact path="/tv/detail/:id" render={() => <MovieDetailPage />} />
+        <Route
+          exact
+          path="/tv/:listname/detail/:id"
+          render={(routeProps) => <MovieDetailPage {...routeProps} />}
+        />
         <Route exact path="/profile/login" render={() => <LoginPage />} />
 
         <Route exact path="/profile/:id" render={() => <ProfilePage />} />
