@@ -21,6 +21,9 @@ const PopularList = ({ popular }) => {
     if (url.includes("movies-all")) {
       title = "Movie List";
     }
+    if (url.includes("tv-all")) {
+      title = "TV";
+    }
     return title;
   };
 
