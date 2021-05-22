@@ -1,16 +1,21 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import "../../styles/PopularCard.style.scss";
 import applicationHelper from "../../helpers/applicationHelper";
 const PopularCard = ({ image, year, name = "", point, id }) => {
   const history = useHistory();
+  const { path } = useRouteMatch();
 
   let cardPoint = parseFloat(point).toString().split(".");
 
   const handleName = applicationHelper.addSuffixToString;
 
   const handleClick = (e) => {
-    history.push(`/movies/popularlist/detail/${id}`);
+    if (path.includes("tv")) {
+      history.push(`/tv/popularlist/detail/${id}`);
+    } else {
+      history.push(`/movies/popularlist/detail/${id}`);
+    }
   };
 
   return (
