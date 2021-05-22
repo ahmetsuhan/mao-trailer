@@ -95,6 +95,13 @@ const Root = () => {
           path="/tv/:listname/detail/:id"
           render={(routeProps) => <MovieDetailPage {...routeProps} />}
         />
+
+        <Route
+          exact
+          path="/tv/:movieId/comments"
+          render={() => <MovieCommentsPage />}
+        />
+
         <Route exact path="/profile/login" render={() => <LoginPage />} />
 
         <Route exact path="/profile/:id" render={() => <ProfilePage />} />
