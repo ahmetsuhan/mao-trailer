@@ -17,6 +17,15 @@ const MovieDetailPage = ({ match, movies, history }) => {
 
   const [showPopup, setShowPopup] = useToggle(false);
 
+  const tv = useSelector((state) => state.tv.tvies);
+
+  const handleDataByPath = (path) => {
+    if (path.includes("tv")) {
+      return tv;
+    }
+    return movies;
+  };
+
   const {
     MovieImage,
     MovieName,
@@ -24,7 +33,7 @@ const MovieDetailPage = ({ match, movies, history }) => {
     MovieSubject,
     MoviePlayer,
     moviePoint,
-  } = getMovieById(id, movies);
+  } = getMovieById(id, handleDataByPath(match.path));
 
   const handlePlayersRender = (moviePlayers = "") => {
     const players = moviePlayers.split(",");
