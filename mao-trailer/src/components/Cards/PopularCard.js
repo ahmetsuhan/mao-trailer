@@ -11,7 +11,8 @@ const PopularCard = ({ image, year, name = "", point, id }) => {
   const handleName = applicationHelper.addSuffixToString;
 
   const handleClick = (e) => {
-    if (path.includes("tv")) {
+
+     if (path.includes("tv")) {
       history.push(`/tv/popularlist/detail/${id}`);
     } else {
       history.push(`/movies/popularlist/detail/${id}`);

@@ -1,0 +1,56 @@
+.movies-more-page {
+  width: 100%;
+  height: auto;
+  overflow-x: auto;
+  background-color: #fff;
+  .container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 13px;
+    padding-bottom: 34px;
+
+    .top {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      span {
+        margin-left: 5px;
+        font-size: 20px;
+        color: #222222;
+      }
+    }
+
+    .movie-lists {
+      > span {
+        display: inline-block;
+        font-weight: 700;
+        font-size: 20px;
+        color: #666666;
+        line-height: 25px;
+        margin-bottom: 19px;
+      }
+
+      .movies {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .nowlist-card-area {
+          width: 48%;
+          height: auto;
+          margin-bottom: 20px;
+        }
+
+        .popularlist-card-area {
+          width: 48%;
+          height: 237px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
