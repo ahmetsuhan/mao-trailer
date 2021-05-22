@@ -12,7 +12,8 @@ const MoviesMorePage = ({ history, match }) => {
     }
     if (
       match.params.listname === "popular-list" ||
-      match.params.listname === "movies-all"
+      match.params.listname === "movies-all" ||
+      match.params.listname === "tv-all"
     ) {
       return <PopularList />;
     }
