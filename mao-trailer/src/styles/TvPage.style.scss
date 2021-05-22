@@ -1,0 +1,133 @@
+.tv {
+  .top-section {
+    margin-top: 19px;
+    margin-bottom: 20px;
+    > span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #666;
+      margin-left: 20px;
+    }
+    .top-section-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      overflow-x: auto;
+      padding-top: 5px;
+
+      .scroll-row {
+        min-width: 100%;
+        display: flex;
+        align-items: center;
+
+        .card-area {
+          width: 320px;
+          height: 160px;
+
+          &:not(:last-child) {
+            margin-right: 20px;
+          }
+
+          &:first-child {
+            margin-left: 20px;
+          }
+          &:last-child {
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .now {
+    margin-top: 19px;
+    margin-bottom: 20px;
+    > span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #666;
+      margin-left: 20px;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      overflow-x: auto;
+      padding-top: 5px;
+
+      .scroll-row {
+        min-width: 100%;
+        display: flex;
+        align-items: center;
+
+        .card-area {
+          width: 140px;
+          height: 238px;
+
+          &:not(:last-child) {
+            margin-right: 20px;
+          }
+
+          &:first-child {
+            margin-left: 20px;
+          }
+          &:last-child {
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .popular {
+    width: 100%;
+    height: auto;
+    margin-bottom: 80px;
+    > span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #666;
+      margin-left: 20px;
+    }
+
+    .container {
+      width: 100%;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      overflow-x: auto;
+      padding-top: 5px;
+
+      .scroll-row {
+        min-width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .aso {
+          width: 140px;
+          min-width: 140px;
+          margin-bottom: 20px;
+          height: 210px;
+          &:not(:last-child) {
+            margin-right: 20px;
+          }
+          &:first-child {
+            margin-left: 20px;
+          }
+          &:last-child {
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+}
