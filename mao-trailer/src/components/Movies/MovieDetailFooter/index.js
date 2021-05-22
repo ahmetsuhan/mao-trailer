@@ -1,11 +1,13 @@
 import React from "react";
 import { useToggle } from "../../../hooks/useToggle";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import "../../../styles/MovieDetailFooter.style.scss";
 
 const MovieDetailFooter = ({ movieId }) => {
   const [isLiked, setIsliked] = useToggle(false);
   const [isFavorite, setIsFavorite] = useToggle(false);
+
+  const match = useRouteMatch();
 
   const history = useHistory();
   const handleClickLikeBtn = (e) => {
@@ -17,7 +19,11 @@ const MovieDetailFooter = ({ movieId }) => {
   };
 
   const handleClickCommentBtn = () => {
-    history.push(`/movies/${movieId}/comments`);
+    if (match.path.includes("tv")) {
+      history.push(`/tv/${movieId}/comments`);
+    } else {
+      history.push(`/movies/${movieId}/comments`);
+    }
   };
 
   return (
