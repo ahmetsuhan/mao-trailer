@@ -1,0 +1,35 @@
+.movie-top-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+
+  .movie-top-card-img {
+    width: 100%;
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  span {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+    line-height: 1.2;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
