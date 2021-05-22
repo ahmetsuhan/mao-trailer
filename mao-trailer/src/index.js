@@ -83,6 +83,13 @@ const Root = () => {
         />
 
         <Route exact path="/tv/detail/:id" render={() => <MovieDetailPage />} />
+
+        <Route
+          exact
+          path="/tv/detail/:id/playview"
+          render={() => <MoviePlayViewPage />}
+        />
+
         <Route
           exact
           path="/tv/:listname/detail/:id"
