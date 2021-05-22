@@ -1,0 +1,12 @@
+footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    margin-top: 10px;
+    &:not(:last-child) {
+      margin-right: 53px;
+    }
+  }
+}
