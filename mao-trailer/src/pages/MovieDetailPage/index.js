@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router";
 import MovieDetailFooter from "../../components/Movies/MovieDetailFooter";
 import "../../styles/MovieDetailPage.style.scss";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { getMovieById } from "../../store/movie/movieUtils";
 
 import applicationHelper from "../../helpers/applicationHelper";
@@ -79,7 +79,11 @@ const MovieDetailPage = ({ match, movies, history }) => {
   };
 
   const handleClickPlayBtn = () => {
-    history.push(`/movies/detail/${id}/playview`);
+    if (match.path.includes("tv")) {
+      history.push(`/tv/detail/${id}/playview`);
+    } else {
+      history.push(`/movies/detail/${id}/playview`);
+    }
   };
 
   return (
