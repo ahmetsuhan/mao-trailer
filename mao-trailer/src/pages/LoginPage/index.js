@@ -13,7 +13,7 @@ const LoginPage = ({ setCurrentUser }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
+    debugger;
     let loggedInUser = isLoginSuccess(
       { email: input.email, password: input.password, users: users },
       null

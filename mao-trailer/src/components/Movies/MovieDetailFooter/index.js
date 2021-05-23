@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { useToggle } from "../../../hooks/useToggle";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import "../../../styles/MovieDetailFooter.style.scss";
+import { useSelector } from "react-redux";
+
+import { getDataById } from "../../../helpers/commonFunctions";
+import {
+  addLikedMovieToCurrentUser,
+  addFavouriteMoviesToCurrentUser,
+  removeFavouriteMovieToCurrentUser,
+  removeLikedMovieToCurrentUser,
+} from "../../../store/user/userUtils";
 
 const MovieDetailFooter = ({ movieId }) => {
   const [isLiked, setIsliked] = useToggle(false);
@@ -10,12 +19,49 @@ const MovieDetailFooter = ({ movieId }) => {
   const match = useRouteMatch();
 
   const history = useHistory();
+
+  const current = useSelector((state) => state.user.currentUser);
+
+  const movies = useSelector((state) => state.movie.movies);
+  let thisMovie = getDataById(movieId, movies);
+  const { MovieName } = thisMovie;
+  useLayoutEffect(() => {
+    if (Object.keys(current).length > 0) {
+      if (
+        current.likedMovies.filter((m) => m.MovieName === MovieName).length > 0
+      ) {
+        setIsliked(true);
+      }
+    }
+  }, [current, setIsliked, MovieName]);
+
+  useLayoutEffect(() => {
+    if (Object.keys(current).length > 0) {
+      if (
+        current.favouriteMovies.filter((m) => m.MovieName === MovieName)
+          .length > 0
+      ) {
+        setIsFavorite(true);
+      }
+    }
+  }, [current, setIsFavorite, MovieName]);
+
   const handleClickLikeBtn = (e) => {
     setIsliked((prev) => (prev = !prev));
+    if (!isLiked && current) {
+      addLikedMovieToCurrentUser(current, thisMovie);
+    } else if (isLiked && current) {
+      removeLikedMovieToCurrentUser(current, thisMovie);
+    }
   };
 
   const handleClickFavoriteBtn = (e) => {
     setIsFavorite((prev) => (prev = !prev));
+    if (!isFavorite && current) {
+      addFavouriteMoviesToCurrentUser(current, thisMovie);
+    } else if (isFavorite && current) {
+      removeFavouriteMovieToCurrentUser(current, thisMovie);
+    }
   };
 
   const handleClickCommentBtn = () => {

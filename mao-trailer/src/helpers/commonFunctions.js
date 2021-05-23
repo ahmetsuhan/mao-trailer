@@ -150,3 +150,17 @@ export const upperAllText = (str = "", suffix = " ") => {
     )
     .join(" ");
 };
+
+export const getAllData = async () => {
+  const res = await fetch("http://localhost:3004/data/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "applciation/json",
+    },
+  });
+
+  const data = await res.json();
+
+  return data;
+};
