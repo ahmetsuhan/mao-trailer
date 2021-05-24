@@ -164,3 +164,15 @@ export const getAllData = async () => {
 
   return data;
 };
+
+export const isExistingMovieOrTv = (obj, arr) => {
+  if (arr.length === 0) {
+    return false;
+  }
+  const isExisting = arr.filter((d) => d.MovieName === obj.MovieName);
+
+  if (isExisting.length === 0) {
+    return false;
+  }
+  return isExisting;
+};

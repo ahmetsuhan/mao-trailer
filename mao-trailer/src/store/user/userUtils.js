@@ -1,5 +1,5 @@
 import { getAllData } from "../../helpers/commonFunctions";
-
+import { getMovie } from "../movie/movieUtils";
 export const addNewFeaturesToUser = (users = []) => {
   let data = users || [];
 
@@ -10,10 +10,7 @@ export const addNewFeaturesToUser = (users = []) => {
   return data.map((user, index) => {
     return {
       ...user,
-      movieComments: [],
-
       lastWatchedMovie: {},
-
       watchingMovies: [],
     };
   });
@@ -32,6 +29,13 @@ export const findUser = (user, data) => {
     return Object.values(data).find(({ id }) => id.value === user.id.value);
   }
   return undefined;
+};
+
+export const findUserById = (userId, users) => {
+  if (!Array.isArray(users)) {
+    return;
+  }
+  return users.filter((u) => u.id.value === userId);
 };
 
 export const addFavouriteMoviesToCurrentUser = (
@@ -118,6 +122,7 @@ export const addLikedMovieToCurrentUser = (currentUser, likedMovie) => {
     console.log("isExisting!!!");
     return false;
   }
+  //likedMovie.movieLike.users.push(currentUser);
   currentUser.likedMovies.push(likedMovie);
   let d = getAllData();
   d.then((res) => {
@@ -131,7 +136,22 @@ export const addLikedMovieToCurrentUser = (currentUser, likedMovie) => {
       (user) => user.id.value === find.id.value
     );
 
+    // let mov = getMovie(likedMovie, res.movieData);
+    // mov[0][1] = likedMovie;
+    // console.log(mov);
+    // console.log(likedMovie);
+
+    // let newDatas = Object.entries(res.movieData);
+    // for (let i = 0; i < newDatas.length; i++) {
+    //   if (newDatas[i][0] === mov[0][0]) {
+    //     newDatas[i][1] = mov[0][1];
+    //   }
+    // }
+    // let asd = Object.fromEntries(newDatas);
+    // //res.movieData = asd;
+
     userdata.randomUsers[index] = currentUser;
+    //console.log(Object.fromEntries(newDatas));
     fetch("http://localhost:3004/data/", {
       method: "PUT",
       headers: {
@@ -144,17 +164,20 @@ export const addLikedMovieToCurrentUser = (currentUser, likedMovie) => {
 };
 
 export const removeLikedMovieToCurrentUser = (currentUser, likedMovie) => {
-  if (!currentUser || !likedMovie) {
+  if (!currentUser || !likedMovie || currentUser === {}) {
     return;
   }
 
   if (!isExistingMovieOrTv(likedMovie, currentUser.likedMovies)) {
     return false;
   }
+  console.log(likedMovie);
   let indx = currentUser.likedMovies.findIndex(
-    (fm) => (fm.MovieName = likedMovie.MovieName)
+    (fm) => fm.movieId === likedMovie.movieId
   );
+
   currentUser.likedMovies.splice(indx, 1);
+
   let d = getAllData();
   d.then((res) => {
     d = res;
@@ -190,3 +213,12 @@ const isExistingMovieOrTv = (obj, arr) => {
   }
   return isExisting;
 };
+
+// const updateUsers = (next, old) => {
+//   let currentUser = options.currentUser || {};
+
+//   if (currentUser && users.length > 0 && !app.isEmptyObject(currentUser)) {
+//     let asd = this.findUser(currentUser, users);
+//     console.log(asd);
+//   }
+// };

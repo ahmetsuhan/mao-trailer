@@ -20,5 +20,12 @@ button {
   &.linear-colored {
     background: linear-gradient(147deg, #f99f00 8%, #db3069 82%);
     color: #fff;
+
+    .children {
+      a {
+        font-size: 24px;
+        color: #fff;
+      }
+    }
   }
 }

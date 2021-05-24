@@ -1,3 +1,6 @@
+import { getAllData } from "../../helpers/commonFunctions";
+import { findUser } from "../user/userUtils";
+
 const generateRandomMoviePoint = () => {
   return (Math.random() * 10).toFixed(2);
 };
@@ -11,23 +14,23 @@ const deleteAllSpaces = (str = "") => {
   return newStr;
 };
 
-export const setDummyPointAndIdToMovies = (movies = {}) => {
-  let data = Object.entries(movies);
-  if (Object.keys(data).length === 0) {
-    return;
-  }
+// export const setDummyPointAndIdToMovies = (movies = {}) => {
+//   let data = Object.entries(movies);
+//   if (Object.keys(data).length === 0) {
+//     return;
+//   }
 
-  for (let i = 0; i < data.length; i++) {
-    data[i][1] = {
-      ...data[i][1],
-      moviePoint: generateRandomMoviePoint(),
-      movieId:
-        generateRandomId().toString() + deleteAllSpaces(data[i][1].MovieName),
-    };
-  }
+//   for (let i = 0; i < data.length; i++) {
+//     data[i][1] = {
+//       ...data[i][1],
+//       moviePoint: generateRandomMoviePoint(),
+//       movieId:
+//         generateRandomId().toString() + deleteAllSpaces(data[i][1].MovieName),
+//     };
+//   }
 
-  return Object.fromEntries(data);
-};
+//   return Object.fromEntries(data);
+// };
 
 export const setNowAndPopularMovie = (movies = {}) => {
   let data = Object.entries(movies);
@@ -90,26 +93,27 @@ export const getMovieById = (id = 0, movies = {} || []) => {
   return null;
 };
 
-export const addExtraFeaturesToMovies = (movies = {}) => {
-  let data = movies || {};
+// export const addExtraFeaturesToMovies = (movies = {}) => {
+//   let data = movies || {};
 
-  if (Object.keys(data).length === 0) {
-    return;
-  }
+//   if (Object.keys(data).length === 0) {
+//     return;
+//   }
 
-  let newDataArr = Object.entries(data);
+//   let newDataArr = Object.entries(data);
 
-  for (let i = 0; i < newDataArr.length; i++) {
-    newDataArr[i][1] = {
-      ...newDataArr[i][1],
-      movieLike: { users: [], likeCount: 0 },
-      movieComments: [], // comments:[{commentId: "1", userId: "1", commentDate: "01-08-2021", comment: "çok Güzel bir filmdi!!!",}]
-      movieCommentCount: 0,
-    };
-  }
+//   for (let i = 0; i < newDataArr.length; i++) {
+//     newDataArr[i][1] = {
+//       ...newDataArr[i][1],
+//       movieLike: { users: [], likeCount: 0 },
+//       movieComments: [],
 
-  return Object.fromEntries(newDataArr);
-};
+//       movieCommentCount: 0,
+//     };
+//   }
+
+//   return Object.fromEntries(newDataArr);
+// };
 
 export const getSearchedMovies = (movieName = "", movies = {}) => {
   const isEmpty = Object.keys(movies).length === 0;
@@ -128,5 +132,66 @@ export const getSearchedMovies = (movieName = "", movies = {}) => {
         .toLocaleLowerCase()
         .includes(movieName.toString().toLocaleLowerCase())
     )
+  );
+};
+
+export const addCommentToMovie = (currentUser, comment = {}, movie) => {
+  if (
+    Object.keys(currentUser).length === 0 ||
+    Object.keys(comment).length === 0 ||
+    !movie
+  ) {
+    return;
+  }
+  comment.id = generateRandomId();
+
+  comment.commentDate = Date.now();
+  comment.userId = currentUser.id.value;
+
+  movie.movieComments.push(comment);
+  currentUser.movieComments.push(comment);
+
+  let d = getAllData();
+
+  d.then((res) => {
+    d = res;
+    let userdata = res.userdata;
+
+    let user = findUser(currentUser, userdata.randomUsers);
+    let userIndex = userdata.randomUsers.findIndex(
+      (u) => u.id.value === user.id.value
+    );
+    userdata.randomUsers[userIndex] = currentUser;
+
+    let mov = getMovie(movie, res.movieData);
+    mov[0][1] = movie;
+
+    let newDatas = Object.entries(res.movieData);
+    for (let i = 0; i < newDatas.length; i++) {
+      if (newDatas[i][0] === mov[0][0]) {
+        newDatas[i][1] = mov[0][1];
+      }
+    }
+    res.movieData = Object.fromEntries(newDatas);
+    console.log(d.movieData);
+    fetch("http://localhost:3004/data/", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(res),
+    });
+  });
+};
+
+export const getMovie = (movie, movies) => {
+  if (!movie || !movies) {
+    return;
+  }
+  return Object.entries(movies).filter(
+    (d, i) =>
+      d[1].MovieName === movie.MovieName &&
+      d[1].MovieSubject === movie.MovieSubject
   );
 };

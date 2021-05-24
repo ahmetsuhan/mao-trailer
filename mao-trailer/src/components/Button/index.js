@@ -10,7 +10,7 @@ const Button = ({ children, text, onClick, type = "button", filledColor }) => {
       type={type}
     >
       {text ? <span>{text}</span> : ""}
-      {children}
+      {children && <div className="children">{children}</div>}
     </button>
   );
 };

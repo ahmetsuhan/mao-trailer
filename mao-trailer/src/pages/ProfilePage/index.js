@@ -86,7 +86,13 @@ const ProfilePage = () => {
       });
     }
     if (comments) {
-      console.log("comments");
+      return loggedUser.movieComments.map((c, i) => {
+        return (
+          <div className="comment" key={i}>
+            <span>{c.commentMessage}</span>
+          </div>
+        );
+      });
     }
   };
   return (
@@ -146,7 +152,7 @@ const ProfilePage = () => {
             {/* <div className="img-area">
               <MovieCard movieImage="https://randomuser.me/api/portraits/women/46.jpg" />
             </div> */}
-            {handleActiveTabRender(activeTab)}
+            <div>{handleActiveTabRender(activeTab)}</div>
           </div>
         </section>
       </main>
